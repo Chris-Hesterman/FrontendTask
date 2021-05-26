@@ -79,6 +79,7 @@ const App = () => {
   return (
     <StyledContainer data-testid="app-container">
       <StyledInput
+        type="text"
         value={nameFilter}
         onChange={handleChange}
         placeholder="Search by name"

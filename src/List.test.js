@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import List from './List';
 
 const studentProfiles = [
@@ -28,8 +28,10 @@ const studentProfiles = [
 
 describe('<List /> component', () => {
   test('it renders correctly', () => {
-    render(<List studentProfiles={studentProfiles} />);
+    const list = render(<List studentProfiles={studentProfiles} />);
 
-    expect(screen.getByTestId('list-component')).toBeInTheDocument();
+    expect(list.getByTestId('list-component')).toBeInTheDocument();
+    expect(list.getAllByTestId('list-item')).toHaveLength(2);
+    expect(list.getAllByTestId('list-item')).not.toHaveLength(3);
   });
 });

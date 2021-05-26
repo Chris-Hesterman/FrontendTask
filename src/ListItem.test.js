@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import ListItem from './ListItem';
 
 const student = {
@@ -17,13 +17,13 @@ const average = 88.875;
 
 describe('<ListItemm />', () => {
   test('it renders correctly', () => {
-    render(<ListItem student={student} average={average} />);
+    const listItem = render(<ListItem student={student} average={average} />);
 
-    expect(screen.getByRole('heading')).toBeInTheDocument();
-    expect(screen.getByRole('img')).toBeInTheDocument();
-    expect(screen.getByText(/email:/i)).toBeInTheDocument();
-    expect(screen.getByText(/company:/i)).toBeInTheDocument();
-    expect(screen.getByText(/skill:/i)).toBeInTheDocument();
-    expect(screen.getByText(/average:/i)).toBeInTheDocument();
+    expect(listItem.getByRole('heading')).toBeInTheDocument();
+    expect(listItem.getByRole('img')).toBeInTheDocument();
+    expect(listItem.getByText(/email:/i)).toBeInTheDocument();
+    expect(listItem.getByText(/company:/i)).toBeInTheDocument();
+    expect(listItem.getByText(/skill:/i)).toBeInTheDocument();
+    expect(listItem.getByText(/average:/i)).toBeInTheDocument();
   });
 });

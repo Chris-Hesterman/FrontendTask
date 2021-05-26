@@ -41,7 +41,10 @@ const StyledLi = styled.li`
 
 const ListItem = ({ student, average }) => {
   return (
-    <StyledContainer key={student.firstName + student.lastName}>
+    <StyledContainer
+      key={student.firstName + student.lastName}
+      data-testid="list-item"
+    >
       <StyledImage
         data-testid="image"
         src={student.pic}
