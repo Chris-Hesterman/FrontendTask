@@ -4,42 +4,47 @@ import styled from 'styled-components';
 import List from './List';
 
 const StyledContainer = styled.div`
-  width: 60vw;
-  height: 80vh;
+  background: #fff;
   border-radius: 10px;
   border: 1px solid #ddd;
   border-left: 2px solid #dfdfdf;
   border-right: 2px solid #dfdfdf;
+  height: 80vh;
   overflow-y: scroll;
-  background: #fff;
+  width: 60vw;
   ::-webkit-scrollbar {
     display: none;
   }
 `;
 
 const StyledInput = styled.input`
-  font-family: Raleway, sans-serif;
-  outline: none;
+  border: none;
+  border-bottom: 2px solid #eaeaea;
   color: #666;
   display: block;
-  border: none;
   font-size: 1.4rem;
   font-weight: 300;
-  padding: 1.4rem 0 0.7rem 1rem;
+  font-family: Raleway, sans-serif;
+  margin: 0 auto 0.7rem auto;
+  padding: 1.4rem 0 0.75rem 0.4rem;
+  position: sticky;
+  position: -webkit-sticky;
+  outline: none;
+  top: 0;
+  width: 97%;
+  z-index: 100;
   ::placeholder {
     color: #afafaf;
   }
-`;
-
-const StyledHr = styled.hr`
-  margin: 0 0.75rem;
-  border: 1px solid #e6e6e6;
-  margin-bottom: 0.75rem;
+  :focus {
+    border-bottom: 2px solid #757575;
+  }
 `;
 
 const App = () => {
   const [studentProfiles, setStudentProfiles] = useState([]);
-  const [filter, setFilter] = useState('');
+  const [nameFilter, setNameFilter] = useState('');
+  const [filteredProfiles, setFilteredProfiles] = useState([]);
 
   const fetchData = () => {
     const apiEndpoint = 'https://api.hatchways.io/assessment/students';
@@ -50,8 +55,22 @@ const App = () => {
   };
 
   const handleChange = (e) => {
-    setFilter(e.target.value);
+    setNameFilter(e.target.value);
   };
+
+  useEffect(() => {
+    let filtered = [];
+
+    if (nameFilter.length > 1) {
+      filtered = studentProfiles.filter((student) => {
+        const fullName = `${student.firstName} ${student.lastName}`;
+
+        return fullName.toLowerCase().includes(nameFilter.toLowerCase());
+      });
+    }
+    filtered = filtered.length > 0 ? filtered : [];
+    setFilteredProfiles(filtered);
+  }, [nameFilter, studentProfiles]);
 
   useEffect(() => {
     fetchData();
@@ -60,12 +79,15 @@ const App = () => {
   return (
     <StyledContainer data-testid="app-container">
       <StyledInput
-        value={filter}
+        value={nameFilter}
         onChange={handleChange}
         placeholder="Search by name"
       ></StyledInput>
-      <StyledHr></StyledHr>
-      <List studentProfiles={studentProfiles} />
+      <List
+        studentProfiles={
+          nameFilter.length > 1 ? filteredProfiles : studentProfiles
+        }
+      />
     </StyledContainer>
   );
 };

@@ -5,13 +5,13 @@ import App from './App';
 
 const GlobalStyle = createGlobalStyle`
   body {
-    height: 100vh;
-    margin: 0;
-    font-family: Raleway, sans-serif;
-    display: flex;
-    justify-content: center;
     align-items: center;
     background-color: #efefef;
+    display: flex;
+    font-family: Raleway, sans-serif;
+    height: 100vh;
+    justify-content: center;
+    margin: 0;
   }
 `;
 

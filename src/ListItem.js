@@ -2,8 +2,8 @@ import styled from 'styled-components';
 import { v4 as uuidv4 } from 'uuid';
 
 const StyledContainer = styled.div`
-  display: flex;
   align-items: center;
+  display: flex;
 `;
 
 const StyledStats = styled.div`
@@ -14,25 +14,25 @@ const StyledStats = styled.div`
 `;
 
 const StyledHeader = styled.h1`
-  text-transform: uppercase;
   font-weight: 700;
   font-size: 2.8rem;
   margin: 0.5rem 0 0 0;
+  text-transform: uppercase;
 `;
 
 const StyledImage = styled.img`
-  height: 8.6rem;
   border: 2px solid #ddd;
   border-radius: 50%;
+  height: 8.6rem;
   margin: 1.8rem 1.8rem;
 `;
 
 const StyledUl = styled.ul`
-  list-style-type: none;
-  padding-left: 1.5rem;
-  font-size: 1.1rem;
-  margin-top: 0.75rem 0 0.5rem 0;
   color: #666;
+  font-size: 1.1rem;
+  list-style-type: none;
+  margin-top: 0.75rem 0 0.5rem 0;
+  padding-left: 1.5rem;
 `;
 
 const StyledLi = styled.li`

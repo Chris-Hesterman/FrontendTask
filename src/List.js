@@ -3,8 +3,8 @@ import ListItem from './ListItem';
 
 const StyledHr = styled.hr`
   border: 1px solid #eee;
-  opacity: 0.7;
   margin: 0;
+  opacity: 0.7;
 `;
 
 const List = ({ studentProfiles }) => {
