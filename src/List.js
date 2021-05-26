@@ -1,6 +1,10 @@
 import styled from 'styled-components';
 import ListItem from './ListItem';
 
+const StyledContainer = styled.div`
+  width: 100%;
+`;
+
 const StyledHr = styled.hr`
   border: 1px solid #eee;
   margin: 0;
@@ -27,7 +31,9 @@ const List = ({ studentProfiles }) => {
     );
   });
 
-  return <div data-testid="list-component">{students}</div>;
+  return (
+    <StyledContainer data-testid="list-component">{students}</StyledContainer>
+  );
 };
 
 export default List;
