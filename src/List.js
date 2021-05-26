@@ -1,4 +1,11 @@
+import styled from 'styled-components';
 import ListItem from './ListItem';
+
+const StyledHr = styled.hr`
+  border: 1px solid #eee;
+  opacity: 0.7;
+  margin: 0;
+`;
 
 const List = ({ studentProfiles }) => {
   const calcAverage = (student) => {
@@ -15,6 +22,7 @@ const List = ({ studentProfiles }) => {
     return (
       <div key={student.firstName + student.lastName}>
         <ListItem student={student} average={average} />
+        <StyledHr />
       </div>
     );
   });
