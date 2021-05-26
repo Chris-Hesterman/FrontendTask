@@ -8,8 +8,8 @@ const StyledContainer = styled.div`
   height: 80vh;
   border-radius: 10px;
   border: 1px solid #ddd;
-  border-left: 2px solid #ddd;
-  border-right: 2px solid #ddd;
+  border-left: 2px solid #dfdfdf;
+  border-right: 2px solid #dfdfdf;
   overflow-y: scroll;
   background: #fff;
   ::-webkit-scrollbar {
@@ -17,8 +17,29 @@ const StyledContainer = styled.div`
   }
 `;
 
+const StyledInput = styled.input`
+  font-family: Raleway, sans-serif;
+  outline: none;
+  color: #666;
+  display: block;
+  border: none;
+  font-size: 1.4rem;
+  font-weight: 300;
+  padding: 1.4rem 0 0.7rem 1rem;
+  ::placeholder {
+    color: #afafaf;
+  }
+`;
+
+const StyledHr = styled.hr`
+  margin: 0 0.75rem;
+  border: 1px solid #e6e6e6;
+  margin-bottom: 0.75rem;
+`;
+
 const App = () => {
   const [studentProfiles, setStudentProfiles] = useState([]);
+  const [filter, setFilter] = useState('');
 
   const fetchData = () => {
     const apiEndpoint = 'https://api.hatchways.io/assessment/students';
@@ -28,12 +49,22 @@ const App = () => {
     });
   };
 
+  const handleChange = (e) => {
+    setFilter(e.target.value);
+  };
+
   useEffect(() => {
     fetchData();
   }, []);
 
   return (
     <StyledContainer data-testid="app-container">
+      <StyledInput
+        value={filter}
+        onChange={handleChange}
+        placeholder="Search by name"
+      ></StyledInput>
+      <StyledHr></StyledHr>
       <List studentProfiles={studentProfiles} />
     </StyledContainer>
   );

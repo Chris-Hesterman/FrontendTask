@@ -32,7 +32,7 @@ const StyledUl = styled.ul`
   padding-left: 1.5rem;
   font-size: 1.1rem;
   margin-top: 0.75rem 0 0.5rem 0;
-  color: #999;
+  color: #666;
 `;
 
 const StyledLi = styled.li`
