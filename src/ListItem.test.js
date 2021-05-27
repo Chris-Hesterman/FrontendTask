@@ -13,11 +13,9 @@ const student = {
   skill: 'Oracle'
 };
 
-const average = 88.875;
-
 describe('<ListItemm />', () => {
   test('it renders correctly', () => {
-    const listItem = render(<ListItem student={student} average={average} />);
+    const listItem = render(<ListItem student={student} />);
 
     expect(listItem.getByRole('heading')).toBeInTheDocument();
     expect(listItem.getByRole('img')).toBeInTheDocument();
