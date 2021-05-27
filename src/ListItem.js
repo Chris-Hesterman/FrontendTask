@@ -113,8 +113,8 @@ const StyledHeader = styled.h1`
 const StyledImage = styled.img`
   border: 2px solid #ddd;
   border-radius: 50%;
-  height: 8.6rem;
-  margin: 1.8rem 1.8rem;
+  height: 9.68rem;
+  margin: 1.35rem 2.35rem 0 1.25rem;
 `;
 
 const StyledExpand = styled.button`
@@ -154,10 +154,14 @@ const StyledForm = styled.form`
 `;
 
 const StyledInput = styled.input`
+  font-family: Raleway, sans-serif;
   color: #666;
   border: none;
   outline: none;
   border-bottom: 2px solid #ddd;
+  font-size: 1.03rem;
+  padding: 0.5rem 0 0.75rem 0.25rem;
+  width: 11.75rem;
   :focus {
     border-bottom: 2px solid #666;
   }
@@ -167,13 +171,15 @@ const StyledInput = styled.input`
 `;
 
 const StyledTag = styled.button`
+  font-family: Raleway, sans-serif;
   color: #666;
   background: #e0e0e0;
   outline: none;
   border: none;
-  border-radius: 5px;
-  padding: 0.5rem;
-  margin-right: 5px;
+  border-radius: 4px;
+  padding: 0.71rem;
+  margin: 0.35rem 0.25rem 0.3rem 0.25rem;
+  font-size: 1.1rem;
 `;
 
 export default ListItem;
