@@ -68,8 +68,13 @@ const StyledLi = styled.li`
   margin-bottom: 0.3rem;
 `;
 
-const ListItem = ({ student, average }) => {
+const ListItem = ({ student }) => {
   const [expand, setExpand] = useState(false);
+  const average =
+    student.grades.reduce((acc, grade) => {
+      acc = acc + Number(grade);
+      return acc;
+    }, 0) / student.grades.length;
 
   const grades = student.grades.map((grade, index) => {
     return (
