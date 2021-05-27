@@ -3,44 +3,6 @@ import axios from 'axios';
 import styled from 'styled-components';
 import List from './List';
 
-const StyledContainer = styled.div`
-  background: #fff;
-  border-radius: 10px;
-  border: 1px solid #ddd;
-  border-left: 2px solid #dfdfdf;
-  border-right: 2px solid #dfdfdf;
-  height: 80vh;
-  overflow-y: scroll;
-  width: 60vw;
-  ::-webkit-scrollbar {
-    display: none;
-  }
-`;
-
-const StyledInput = styled.input`
-  border: none;
-  border-bottom: 2px solid #eaeaea;
-  color: #666;
-  display: block;
-  font-size: 1.4rem;
-  font-weight: 300;
-  font-family: Raleway, sans-serif;
-  margin: 0 auto 0.7rem auto;
-  padding: 1.4rem 0 0.75rem 0.4rem;
-  position: sticky;
-  position: -webkit-sticky;
-  outline: none;
-  top: 0;
-  width: 97%;
-  z-index: 100;
-  ::placeholder {
-    color: #afafaf;
-  }
-  :focus {
-    border-bottom: 2px solid #757575;
-  }
-`;
-
 const App = () => {
   const [studentProfiles, setStudentProfiles] = useState([]);
   const [nameFilter, setNameFilter] = useState('');
@@ -100,5 +62,43 @@ const App = () => {
     </StyledContainer>
   );
 };
+
+const StyledContainer = styled.div`
+  background: #fff;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  border-left: 2px solid #dfdfdf;
+  border-right: 2px solid #dfdfdf;
+  height: 80vh;
+  overflow-y: scroll;
+  width: 60vw;
+  ::-webkit-scrollbar {
+    display: none;
+  }
+`;
+
+const StyledInput = styled.input`
+  border: none;
+  border-bottom: 2px solid #eaeaea;
+  color: #666;
+  display: block;
+  font-size: 1.4rem;
+  font-weight: 300;
+  font-family: Raleway, sans-serif;
+  margin: 0 auto 0.7rem auto;
+  padding: 1.4rem 0 0.75rem 0.4rem;
+  position: sticky;
+  position: -webkit-sticky;
+  outline: none;
+  top: 0;
+  width: 97%;
+  z-index: 100;
+  ::placeholder {
+    color: #afafaf;
+  }
+  :focus {
+    border-bottom: 2px solid #757575;
+  }
+`;
 
 export default App;

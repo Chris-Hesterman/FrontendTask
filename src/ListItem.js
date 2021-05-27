@@ -3,6 +3,55 @@ import styled from 'styled-components';
 import { v4 as uuidv4 } from 'uuid';
 import { FaPlus, FaMinus } from 'react-icons/fa';
 
+const ListItem = ({ student }) => {
+  const [expand, setExpand] = useState(false);
+  const average =
+    student.grades.reduce((acc, grade) => {
+      acc = acc + Number(grade);
+      return acc;
+    }, 0) / student.grades.length;
+
+  const grades = student.grades.map((grade, index) => {
+    return (
+      <li key={uuidv4()}>
+        Test {index + 1}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{grade}%
+      </li>
+    );
+  });
+
+  const handleClick = (e) => {
+    setExpand(!expand);
+  };
+
+  return (
+    <StyledContainer
+      key={student.firstName + student.lastName}
+      data-testid="list-item"
+    >
+      <StyledImage
+        data-testid="image"
+        src={student.pic}
+        alt={'student avatar'}
+      />
+      <StyledStats>
+        <StyledDiv>
+          <StyledHeader>{`${student.firstName} ${student.lastName}`}</StyledHeader>
+          <StyledExpand onClick={handleClick}>
+            {expand ? <FaMinus /> : <FaPlus />}
+          </StyledExpand>
+        </StyledDiv>
+        <StyledUl>
+          <StyledLi key={uuidv4()}>Email: {student.email}</StyledLi>
+          <StyledLi key={uuidv4()}>Company: {student.company}</StyledLi>
+          <StyledLi key={uuidv4()}>Skill: {student.skill}</StyledLi>
+          <StyledLi key={uuidv4()}>Average: {average}%</StyledLi>
+          {expand ? <StyledSubUl>{grades}</StyledSubUl> : null}
+        </StyledUl>
+      </StyledStats>
+    </StyledContainer>
+  );
+};
+
 const StyledContainer = styled.div`
   align-items: flex-start;
   display: flex;
@@ -67,54 +116,5 @@ const StyledSubUl = styled.ul`
 const StyledLi = styled.li`
   margin-bottom: 0.3rem;
 `;
-
-const ListItem = ({ student }) => {
-  const [expand, setExpand] = useState(false);
-  const average =
-    student.grades.reduce((acc, grade) => {
-      acc = acc + Number(grade);
-      return acc;
-    }, 0) / student.grades.length;
-
-  const grades = student.grades.map((grade, index) => {
-    return (
-      <li key={uuidv4()}>
-        Test {index + 1}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{grade}%
-      </li>
-    );
-  });
-
-  const handleClick = (e) => {
-    setExpand(!expand);
-  };
-
-  return (
-    <StyledContainer
-      key={student.firstName + student.lastName}
-      data-testid="list-item"
-    >
-      <StyledImage
-        data-testid="image"
-        src={student.pic}
-        alt={'student avatar'}
-      />
-      <StyledStats>
-        <StyledDiv>
-          <StyledHeader>{`${student.firstName} ${student.lastName}`}</StyledHeader>
-          <StyledExpand onClick={handleClick}>
-            {expand ? <FaMinus /> : <FaPlus />}
-          </StyledExpand>
-        </StyledDiv>
-        <StyledUl>
-          <StyledLi key={uuidv4()}>Email: {student.email}</StyledLi>
-          <StyledLi key={uuidv4()}>Company: {student.company}</StyledLi>
-          <StyledLi key={uuidv4()}>Skill: {student.skill}</StyledLi>
-          <StyledLi key={uuidv4()}>Average: {average}%</StyledLi>
-          {expand ? <StyledSubUl key={uuidv4()}>{grades}</StyledSubUl> : null}
-        </StyledUl>
-      </StyledStats>
-    </StyledContainer>
-  );
-};
 
 export default ListItem;
