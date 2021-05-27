@@ -45,13 +45,17 @@ const App = () => {
   const [studentProfiles, setStudentProfiles] = useState([]);
   const [nameFilter, setNameFilter] = useState('');
   const [filteredProfiles, setFilteredProfiles] = useState([]);
+  const [isError, setIsError] = useState(false);
 
-  const fetchData = () => {
+  const fetchData = async () => {
     const apiEndpoint = 'https://api.hatchways.io/assessment/students';
-
-    axios.get(apiEndpoint).then((response) => {
+    try {
+      const response = await axios.get(apiEndpoint);
       setStudentProfiles(response.data.students);
-    });
+    } catch {
+      console.log('There was a problem');
+      setIsError(true);
+    }
   };
 
   const handleChange = (e) => {
@@ -84,11 +88,15 @@ const App = () => {
         onChange={handleChange}
         placeholder="Search by name"
       ></StyledInput>
-      <List
-        studentProfiles={
-          nameFilter.length > 1 ? filteredProfiles : studentProfiles
-        }
-      />
+      {isError ? (
+        <h1>There was a problem, please refresh and try again</h1>
+      ) : (
+        <List
+          studentProfiles={
+            nameFilter.length > 1 ? filteredProfiles : studentProfiles
+          }
+        />
+      )}
     </StyledContainer>
   );
 };

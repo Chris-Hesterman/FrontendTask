@@ -78,7 +78,7 @@ const ListItem = ({ student }) => {
 
   const grades = student.grades.map((grade, index) => {
     return (
-      <li>
+      <li key={uuidv4()}>
         Test {index + 1}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{grade}%
       </li>
     );
@@ -110,7 +110,7 @@ const ListItem = ({ student }) => {
           <StyledLi key={uuidv4()}>Company: {student.company}</StyledLi>
           <StyledLi key={uuidv4()}>Skill: {student.skill}</StyledLi>
           <StyledLi key={uuidv4()}>Average: {average}%</StyledLi>
-          {expand ? <StyledSubUl>{grades}</StyledSubUl> : null}
+          {expand ? <StyledSubUl key={uuidv4()}>{grades}</StyledSubUl> : null}
         </StyledUl>
       </StyledStats>
     </StyledContainer>
