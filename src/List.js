@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 import ListItem from './ListItem';
 
-const List = ({ studentProfiles }) => {
-  const students = studentProfiles.map((student) => {
+const List = ({ studentProfiles, addTag }) => {
+  const students = studentProfiles.map((student, index) => {
     return (
       <div key={student.firstName + student.lastName}>
-        <ListItem student={student} />
+        <ListItem student={student} index={index} addTag={addTag} />
         <StyledHr />
       </div>
     );

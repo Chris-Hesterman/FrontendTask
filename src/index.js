@@ -3,14 +3,6 @@ import ReactDOM from 'react-dom';
 import { createGlobalStyle } from 'styled-components';
 import App from './App';
 
-ReactDOM.render(
-  <React.StrictMode>
-    <GlobalStyle />
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
-
 const GlobalStyle = createGlobalStyle`
   body {
     align-items: center;
@@ -22,3 +14,11 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
   }
 `;
+
+ReactDOM.render(
+  <React.StrictMode>
+    <GlobalStyle />
+    <App />
+  </React.StrictMode>,
+  document.getElementById('root')
+);

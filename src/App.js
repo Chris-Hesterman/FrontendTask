@@ -20,6 +20,19 @@ const App = () => {
     }
   };
 
+  const addTag = (tagName, student, studentProfileIndex) => {
+    let newProfiles = [...studentProfiles];
+    console.log(tagName);
+    if (!!student.tags) {
+      student.tags = [...student.tags, tagName];
+    } else {
+      student.tags = [tagName];
+    }
+
+    newProfiles[studentProfileIndex] = student;
+    setStudentProfiles(newProfiles);
+  };
+
   const handleChange = (e) => {
     setNameFilter(e.target.value);
   };
@@ -57,6 +70,7 @@ const App = () => {
           studentProfiles={
             nameFilter.length > 1 ? filteredProfiles : studentProfiles
           }
+          addTag={addTag}
         />
       )}
     </StyledContainer>

@@ -3,8 +3,10 @@ import styled from 'styled-components';
 import { v4 as uuidv4 } from 'uuid';
 import { FaPlus, FaMinus } from 'react-icons/fa';
 
-const ListItem = ({ student }) => {
+const ListItem = ({ student, index, addTag }) => {
   const [expand, setExpand] = useState(false);
+  const [tagName, setTagName] = useState('');
+
   const average =
     student.grades.reduce((acc, grade) => {
       acc = acc + Number(grade);
@@ -18,6 +20,27 @@ const ListItem = ({ student }) => {
       </li>
     );
   });
+
+  const tagElements =
+    student.tags && !!student.tags.length
+      ? student.tags.map((tag) => {
+          return (
+            <StyledTag type="button" key={uuidv4()}>
+              {tag}
+            </StyledTag>
+          );
+        })
+      : null;
+
+  const handleChange = (e) => {
+    setTagName(e.target.value);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    addTag(tagName, student, index);
+    setTagName('');
+  };
 
   const handleClick = (e) => {
     setExpand(!expand);
@@ -46,7 +69,16 @@ const ListItem = ({ student }) => {
           <StyledLi key={uuidv4()}>Skill: {student.skill}</StyledLi>
           <StyledLi key={uuidv4()}>Average: {average}%</StyledLi>
           {expand ? <StyledSubUl>{grades}</StyledSubUl> : null}
+          {tagElements}
         </StyledUl>
+        <StyledForm onSubmit={handleSubmit}>
+          <StyledInput
+            type="text"
+            value={tagName}
+            onChange={handleChange}
+            placeholder="Add a tag"
+          ></StyledInput>
+        </StyledForm>
       </StyledStats>
     </StyledContainer>
   );
@@ -115,6 +147,33 @@ const StyledSubUl = styled.ul`
 
 const StyledLi = styled.li`
   margin-bottom: 0.3rem;
+`;
+
+const StyledForm = styled.form`
+  margin-left: 1.5rem;
+`;
+
+const StyledInput = styled.input`
+  color: #666;
+  border: none;
+  outline: none;
+  border-bottom: 2px solid #ddd;
+  :focus {
+    border-bottom: 2px solid #666;
+  }
+  ::placeholder {
+    color: #afafaf;
+  }
+`;
+
+const StyledTag = styled.button`
+  color: #666;
+  background: #e0e0e0;
+  outline: none;
+  border: none;
+  border-radius: 5px;
+  padding: 0.5rem;
+  margin-right: 5px;
 `;
 
 export default ListItem;
