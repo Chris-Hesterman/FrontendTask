@@ -23,7 +23,7 @@ const App = () => {
 
   const addTag = (tagName, student, studentProfileIndex) => {
     let newProfiles = [...studentProfiles];
-    console.log(tagName);
+
     if (!!student.tags) {
       student.tags = [...student.tags, tagName];
     } else {
@@ -36,7 +36,6 @@ const App = () => {
 
   const filterProfiles = useCallback(() => {
     let filtered = [];
-    console.log('made it');
 
     if (nameFilter.length > 1 || tagFilter.length > 0) {
       filtered = studentProfiles.filter((student) => {
@@ -92,7 +91,7 @@ const App = () => {
       ) : (
         <List
           studentProfiles={
-            tagFilter.length || nameFilter.length
+            tagFilter.length || nameFilter.length > 1
               ? filteredProfiles
               : studentProfiles
           }
