@@ -1,7 +1,7 @@
 import { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import axios from 'axios';
-import App from './App';
+import App from '../App';
 
 const apiURL = 'https://api.hatchways.io/assessment/students';
 
@@ -23,8 +23,14 @@ describe('<App />', () => {
     const app = render(<App />);
 
     expect(app.getByTestId('app-container')).toBeInTheDocument();
-    expect(app.getByRole('textbox')).toBeInTheDocument();
-    userEvent.type(app.getByRole('textbox'), 'ing');
-    expect(app.getByRole('textbox')).toHaveValue('ing');
+    expect(app.getAllByRole('textbox')).toHaveLength(2);
+    expect(app.getAllByRole('textbox')[0].name).toBe('name');
+    expect(app.getAllByRole('textbox')[1].name).toBe('tag');
+
+    userEvent.type(app.getAllByRole('textbox')[0], 'ing');
+    expect(app.getAllByRole('textbox')[0].value).toBe('ing');
+
+    userEvent.type(app.getAllByRole('textbox')[1], 'some tag name');
+    expect(app.getAllByRole('textbox')[1].value).toBe('some tag name');
   });
 });

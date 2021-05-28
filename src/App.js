@@ -90,6 +90,7 @@ const App = () => {
         <h1>There was a problem, please refresh and try again</h1>
       ) : (
         <List
+          data-testid="list"
           studentProfiles={
             tagFilter.length || nameFilter.length > 1
               ? filteredProfiles

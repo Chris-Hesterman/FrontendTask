@@ -59,7 +59,7 @@ const ListItem = ({ student, index, addTag }) => {
       <StyledStats>
         <StyledDiv>
           <StyledHeader>{`${student.firstName} ${student.lastName}`}</StyledHeader>
-          <StyledExpand onClick={handleClick}>
+          <StyledExpand onClick={handleClick} name="expand">
             {expand ? <FaMinus /> : <FaPlus />}
           </StyledExpand>
         </StyledDiv>
@@ -68,10 +68,12 @@ const ListItem = ({ student, index, addTag }) => {
           <StyledLi key={uuidv4()}>Company: {student.company}</StyledLi>
           <StyledLi key={uuidv4()}>Skill: {student.skill}</StyledLi>
           <StyledLi key={uuidv4()}>Average: {average}%</StyledLi>
-          {expand ? <StyledSubUl>{grades}</StyledSubUl> : null}
+          {expand ? (
+            <StyledSubUl data-testid="gradeslist">{grades}</StyledSubUl>
+          ) : null}
           {tagElements}
         </StyledUl>
-        <StyledForm onSubmit={handleSubmit}>
+        <StyledForm onSubmit={handleSubmit} aria-label="tagform">
           <StyledInput
             type="text"
             value={tagName}
