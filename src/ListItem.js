@@ -107,13 +107,14 @@ const StyledHeader = styled.h1`
   font-weight: 700;
   font-size: 2.8rem;
   margin: 0.5rem 0 0 0;
+  padding-top: 0.2rem;
   text-transform: uppercase;
 `;
 
 const StyledImage = styled.img`
   border: 2px solid #ddd;
   border-radius: 50%;
-  height: 9.68rem;
+  height: 9.5rem;
   margin: 1.35rem 2.35rem 0 1.25rem;
 `;
 
@@ -131,7 +132,7 @@ const StyledExpand = styled.button`
 `;
 
 const StyledUl = styled.ul`
-  color: #666;
+  color: black;
   font-size: 1.1rem;
   list-style-type: none;
   margin: 0.75rem 0 0.5rem 0;
@@ -139,7 +140,7 @@ const StyledUl = styled.ul`
 `;
 
 const StyledSubUl = styled.ul`
-  color: #666;
+  color: black;
   font-size: 1.1rem;
   list-style-type: none;
   padding: 1.2rem 0 1rem 0;
@@ -155,24 +156,25 @@ const StyledForm = styled.form`
 
 const StyledInput = styled.input`
   font-family: Raleway, sans-serif;
-  color: #666;
+  color: black;
   border: none;
   outline: none;
   border-bottom: 2px solid #ddd;
   font-size: 1.03rem;
   padding: 0.5rem 0 0.75rem 0.25rem;
   width: 11.75rem;
+  margin-bottom: 1.75rem;
   :focus {
     border-bottom: 2px solid #666;
   }
   ::placeholder {
-    color: #afafaf;
+    color: #888;
   }
 `;
 
 const StyledTag = styled.button`
   font-family: Raleway, sans-serif;
-  color: #666;
+  color: black;
   background: #e0e0e0;
   outline: none;
   border: none;

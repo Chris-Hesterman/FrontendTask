@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 import List from './List';
@@ -6,6 +6,7 @@ import List from './List';
 const App = () => {
   const [studentProfiles, setStudentProfiles] = useState([]);
   const [nameFilter, setNameFilter] = useState('');
+  const [tagFilter, setTagFilter] = useState('');
   const [filteredProfiles, setFilteredProfiles] = useState([]);
   const [isError, setIsError] = useState(false);
 
@@ -33,23 +34,36 @@ const App = () => {
     setStudentProfiles(newProfiles);
   };
 
+  const filterProfiles = useCallback(() => {
+    let filtered = [];
+    console.log('made it');
+
+    if (nameFilter.length > 1 || tagFilter.length > 0) {
+      filtered = studentProfiles.filter((student) => {
+        const allTags = student.tags ? student.tags.join(' ') : '';
+        const fullName = `${student.firstName} ${student.lastName}`;
+
+        return (
+          allTags.toLowerCase().includes(tagFilter.toLowerCase()) &&
+          fullName.toLowerCase().includes(nameFilter.toLowerCase())
+        );
+      });
+    }
+
+    setFilteredProfiles(filtered);
+  }, [nameFilter, tagFilter, studentProfiles]);
+
   const handleChange = (e) => {
-    setNameFilter(e.target.value);
+    if (e.target.name === 'name') {
+      setNameFilter(e.target.value);
+    } else {
+      setTagFilter(e.target.value);
+    }
   };
 
   useEffect(() => {
-    let filtered = [];
-
-    if (nameFilter.length > 1) {
-      filtered = studentProfiles.filter((student) => {
-        const fullName = `${student.firstName} ${student.lastName}`;
-
-        return fullName.toLowerCase().includes(nameFilter.toLowerCase());
-      });
-    }
-    filtered = filtered.length > 0 ? filtered : [];
-    setFilteredProfiles(filtered);
-  }, [nameFilter, studentProfiles]);
+    filterProfiles();
+  }, [nameFilter, tagFilter, filterProfiles]);
 
   useEffect(() => {
     fetchData();
@@ -57,18 +71,30 @@ const App = () => {
 
   return (
     <StyledContainer data-testid="app-container">
-      <StyledInput
-        type="text"
-        value={nameFilter}
-        onChange={handleChange}
-        placeholder="Search by name"
-      ></StyledInput>
+      <StyledInputContainer>
+        <StyledNameInput
+          type="text"
+          name="name"
+          value={nameFilter}
+          onChange={handleChange}
+          placeholder="Search by name"
+        ></StyledNameInput>
+        <StyledTagInput
+          type="text"
+          name="tag"
+          value={tagFilter}
+          onChange={handleChange}
+          placeholder="Search by tag"
+        ></StyledTagInput>
+      </StyledInputContainer>
       {isError ? (
         <h1>There was a problem, please refresh and try again</h1>
       ) : (
         <List
           studentProfiles={
-            nameFilter.length > 1 ? filteredProfiles : studentProfiles
+            tagFilter.length || nameFilter.length
+              ? filteredProfiles
+              : studentProfiles
           }
           addTag={addTag}
         />
@@ -91,28 +117,36 @@ const StyledContainer = styled.div`
   }
 `;
 
-const StyledInput = styled.input`
-  border: none;
-  border-bottom: 2px solid #eaeaea;
-  color: #666;
-  display: block;
-  font-size: 1.4rem;
-  font-weight: 300;
-  font-family: Raleway, sans-serif;
-  margin: 0 auto 0.7rem auto;
-  padding: 1.4rem 0 0.75rem 0.4rem;
+const StyledInputContainer = styled.div`
   position: sticky;
   position: -webkit-sticky;
-  outline: none;
   top: 0;
-  width: 97%;
   z-index: 100;
+`;
+
+const StyledNameInput = styled.input`
+  border: none;
+  border-bottom: 2px solid #ddd;
+  color: black;
+  display: block;
+  font-size: 1.4rem;
+  font-weight: 400;
+  font-family: Raleway, sans-serif;
+  margin: 0 auto 0 auto;
+  padding: 1.4rem 0 0.75rem 0.4rem;
+  outline: none;
+  width: 97%;
   ::placeholder {
-    color: #afafaf;
+    color: #888;
   }
   :focus {
     border-bottom: 2px solid #757575;
   }
+`;
+
+const StyledTagInput = styled(StyledNameInput)`
+  margin-bottom: 0.75rem;
+  padding-top: 1.8rem;
 `;
 
 export default App;
